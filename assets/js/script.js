@@ -119,8 +119,24 @@ var currentTime = function() {
 var timeStamp = moment().valueOf();
 var formatStamp = moment(timeStamp).format("L");
 
+// upload timeStamp
+var uploadTimeStamp = function() {
+    localStorage.setItem("formatStamp", JSON.stringify(formatStamp));
+}
+
+//download timeStamp
+var loadTimeStamp = function() {
+    formatStamp = JSON.parse(localStorage.getItem("formatStamp"));
+    //if no timeStamp saved, set a new one
+    if (!formatStamp) {
+        var timeStamp = moment().valueOf();
+        var formatStamp = moment(timeStamp).format("L");
+    }
+}
+
 //when the mouse moves in the container, create a new timestamp of the current date
 $("#container").mousemove(function() {
+    loadTimeStamp();
     var now = moment().valueOf();
     var formatNow = moment(now).format("L");
     //if the current date is not the same as the existing timestamp, reset tasks and set a new timestamp
@@ -130,6 +146,7 @@ $("#container").mousemove(function() {
     }
     timeStamp = moment().valueOf();
     formatStamp = moment(timeStamp).format("L");
+    uploadTimeStamp();
 });
 
 loadAppointments();
