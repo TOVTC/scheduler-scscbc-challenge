@@ -8,17 +8,20 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     />
-    <link
+    <!--fix this?--><link
       rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7up+nqUivzIebhndOJK28anvf"
       crossorigin="anonymous"
     />
     <link
-      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
       rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic-bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Work Day Scheduler</title>
   </head>
 
@@ -28,11 +31,56 @@
       <p class="lead">A simple calendar app for scheduling your work day</p>
       <p id="currentDay" class="lead"></p>
     </header>
-    <div class="container">
-      <!-- Timeblocks go here -->
+    <div class="container" id="container">
+      <div class="row time-block" id="nineAM">
+        <p class="hour col-1">9AM</p>
+        <textarea class="description col-10"></textarea>
+        <button class="saveBtn col-1"><span class="oi oi-folder"></span></button>
+      </div>
+      <div class="row time-block" id="tenAM">
+        <p class="hour col-1">10AM</p>
+        <textarea class="description col-10"></textarea>
+        <button class="saveBtn col-1"><span class="oi oi-folder"></span></button>
+      </div>
+      <div class="row time-block" id="elevenAM">
+        <p class="hour col-1">11AM</p>
+        <textarea class="description col-10"></textarea>
+        <button class="saveBtn col-1"><span class="oi oi-folder"></span></button>
+      </div>
+      <div class="row time-block" id="twelvePM">
+        <p class="hour col-1">12PM</p>
+        <textarea class="description col-10"></textarea>
+        <button class="saveBtn col-1"><span class="oi oi-folder"></span></button>
+      </div>
+      <div class="row time-block" id="onePM">
+        <p class="hour col-1">1PM</p>
+        <textarea class="description col-10"></textarea>
+        <button class="saveBtn col-1"><span class="oi oi-folder"></span></button>
+      </div>
+      <div class="row time-block" id="twoPM">
+        <p class="hour col-1">2PM</p>
+        <textarea class="description col-10"></textarea>
+        <button class="saveBtn col-1"><span class="oi oi-folder"></span></button>
+      </div>
+      <div class="row time-block" id="threePM">
+        <p class="hour col-1">3PM</p>
+        <textarea class="description col-10"></textarea>
+        <button class="saveBtn col-1"><span class="oi oi-folder"></span></button>
+      </div>
+      <div class="row time-block" id="fourPM">
+        <p class="hour col-1">4PM</p>
+        <textarea class="description col-10"></textarea>
+        <button class="saveBtn col-1"><span class="oi oi-folder"></span></button>
+      </div>
+      <div class="row time-block" id="fivePM">
+        <p class="hour col-1">5PM</p>
+        <textarea class="description col-10"></textarea>
+        <button class="saveBtn col-1"><span class="oi oi-folder"></span></button>
+      </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="./assets/js/script.js"></script>
   </body>
 </html>
