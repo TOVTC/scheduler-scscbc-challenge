@@ -25,6 +25,7 @@ Contact repository author.
 
 ## Authors and Acknowledgment
 Made with ❤️ by TOVTC </br>
+Base code © 2020 - 2022 Trilogy Education Services, a 2U, Inc. brand. All Rights Reserved.</br>
 As with all projects, external resources were consulted, but a special thanks to McKayla's answer [here](https://stackoverflow.com/questions/26387052/best-way-to-detect-midnight-and-reset-data) for rendering my own setInterval-based midnight-detection solution obsolete and Michael's answer [here](https://stackoverflow.com/questions/6268679/best-way-to-get-the-key-of-a-key-value-javascript-object) for saving me at four AM when I couldn't load any of my tasks.
 
 ## License
