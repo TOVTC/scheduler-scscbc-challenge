@@ -12,35 +12,51 @@ var schedAppts = {
     threePM: [],
     fourPM: [],
     fivePM: []
-};
+}
 
 //don't forget to save! add a red border to form areas that have been edited, but not saved
 $(".description").change(function(){
     $(this).addClass("unSaved");
 });
 
+//clear all tasks in window and local storage
+$("#reset-tasks").click(function(){
+    var clear = confirm("This action cannot be undone. Proceed?");
+    if (!clear) {
+        return false;
+    } else {
+        $(".description").removeClass("unSaved");
+        reset();
+        loadAppointments();
+    }
+});
+
 //save events
 $(".saveBtn").click(function(){
+    //in this element's parent div, find .description
     $(this).parent().find(".description").removeClass("unSaved");
+    //in schedAppts, reset the array with the key that matches the parent id
     var hour = $(this).parent().attr("id");
     schedAppts[hour] = [];
+    //push the text value of .description to the blank array and update localStorage
     var apptText = $(this).parent().find(".description").val();
     schedAppts[hour].push(apptText);
     saveAppointments();
 });
 
-// upload events
+// upload appointments
 var saveAppointments = function() {
     localStorage.setItem("schedAppts", JSON.stringify(schedAppts));
 }
 
-//match the array key to the id of the row and set the text value of the task description to the value in the array
+//download appointments
 var loadAppointments = function() {
     schedAppts = JSON.parse(localStorage.getItem("schedAppts"));
     //if no array saved to localStorage, upload blank array
     if (!schedAppts) {
         reset();
     }
+    //match the array key to the row id and set the text of its .description child to the value in the array
     Object.keys(schedAppts)
     .forEach(function eachKey(key) { 
         keyId = "#" + key;
@@ -49,19 +65,35 @@ var loadAppointments = function() {
     });
 }
 
-//how many hours in the work day have passed?
+//reset local storage
+var reset = function() {
+    schedAppts = {
+        nineAM: [],
+        tenAM: [],
+        elevenAM: [],
+        twelvePM: [],
+        onePM: [],
+        twoPM: [],
+        threePM: [],
+        fourPM: [],
+        fivePM: []
+    };
+    saveAppointments();
+}
+
+//hours passed in work day
 workDay = 0;
 
-//calculate the difference in hours between the current time and 9AM
+//calculate the difference in rounded hours between the current time and 9AM
 var timeCheck = function() {
     var start = moment().hour(9).minutes(00);
-    var current = moment();
+    var current = moment().hour(10);
     var duration = moment.duration(current.diff(start));
     workDay = Math.floor(duration.asHours());
     currentTime();
 }
 
-//the index number of each array in the savedAppts array corresponds to one hour passing in the work day, check that against workDay
+//check the index number of each array in savedAppts against workDay, and add/remove classes accordingly
 var currentTime = function() {
     Object.keys(schedAppts)
     .forEach(function eachKey(key, index) { 
@@ -83,22 +115,6 @@ var currentTime = function() {
     });
 }
 
-//reset local storage
-var reset = function() {
-    schedAppts = {
-        nineAM: [],
-        tenAM: [],
-        elevenAM: [],
-        twelvePM: [],
-        onePM: [],
-        twoPM: [],
-        threePM: [],
-        fourPM: [],
-        fivePM: []
-    };
-    saveAppointments();
-}
-
 //create a timestamp of the date the page was loaded
 var timeStamp = moment().valueOf();
 var formatStamp = moment(timeStamp).format("L");
@@ -107,7 +123,7 @@ var formatStamp = moment(timeStamp).format("L");
 $("#container").mousemove(function() {
     var now = moment().valueOf();
     var formatNow = moment(now).format("L");
-    //if the current date is not the same as the existing timestamp, the day has changed, so reset tasks and set a new timestamp
+    //if the current date is not the same as the existing timestamp, reset tasks and set a new timestamp
     if (formatNow !== formatStamp) {
         reset();
         loadAppointments();
