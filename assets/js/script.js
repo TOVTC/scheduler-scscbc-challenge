@@ -87,7 +87,7 @@ workDay = 0;
 //calculate the difference in rounded hours between the current time and 9AM
 var timeCheck = function() {
     var start = moment().hour(9).minutes(00);
-    var current = moment().hour(10);
+    var current = moment();
     var duration = moment.duration(current.diff(start));
     workDay = Math.floor(duration.asHours());
     currentTime();
