@@ -4,13 +4,21 @@ body {
   line-height: 1;
 }
 
-textarea{
+textarea {
   background: transparent;
   border: none;
   resize: none;
   color: #000000;
   border-left: 1px solid black;
   padding: 10px;
+}
+
+.reset-tasks {
+  border-radius: 15px;
+}
+
+.container {
+  margin-bottom: 30px;
 }
 
 .jumbotron {
@@ -21,7 +29,7 @@ textarea{
   border-bottom: 10px solid black;
 }
 
-.description{
+.description {
   white-space: pre-wrap;
 }
 
@@ -49,12 +57,12 @@ textarea{
 
 .present {
   background-color: #ff6961;
-  color: white;
+  color: black;
 }
 
 .future {
   background-color: #77dd77;
-  color: white;
+  color: black;
 }
 
 .saveBtn {
@@ -65,7 +73,15 @@ textarea{
   color: white;
 }
 
+.unSaved {
+  border: 3px solid red;
+}
+
 .saveBtn i:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
+}
+
+.saveBtn:focus {
+  color: black;
 }
