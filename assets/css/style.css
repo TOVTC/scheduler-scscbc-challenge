@@ -69,11 +69,15 @@ textarea {
   color: white;
 }
 
+.unSaved {
+  border: 3px solid red;
+}
+
 .saveBtn i:hover {
   font-size: 20px;
   transition: all .3s ease-in-out;
 }
 
-.unSaved {
-  border: 3px solid red;
+.saveBtn:focus {
+  color: black;
 }

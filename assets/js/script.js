@@ -17,7 +17,7 @@ var schedAppts = {
 //don't forget to save! add a red border to form areas that have been edited, but not saved
 $(".description").change(function(){
     $(this).addClass("unSaved");
-})
+});
 
 //save events
 $(".saveBtn").click(function(){
@@ -44,7 +44,7 @@ var loadAppointments = function() {
     Object.keys(schedAppts)
     .forEach(function eachKey(key) { 
         keyId = "#" + key;
-        keyVal = schedAppts[key]
+        keyVal = schedAppts[key];
         $("#container").find(keyId).find(".description").val(keyVal);
     });
 }
@@ -59,7 +59,6 @@ var timeCheck = function() {
     var duration = moment.duration(current.diff(start));
     workDay = Math.floor(duration.asHours());
     currentTime();
-    // dateCheck();
 }
 
 //the index number of each array in the savedAppts array corresponds to one hour passing in the work day, check that against workDay
@@ -100,27 +99,24 @@ var reset = function() {
     saveAppointments();
 }
 
-//
+//create a timestamp of the date the page was loaded
 var timeStamp = moment().valueOf();
 var formatStamp = moment(timeStamp).format("L");
-console.log(formatStamp);
 
+//when the mouse moves in the container, create a new timestamp of the current date
 $("#container").mousemove(function() {
-    console.log("moved!")
     var now = moment().valueOf();
     var formatNow = moment(now).format("L");
+    //if the current date is not the same as the existing timestamp, the day has changed, so reset tasks and set a new timestamp
     if (formatNow !== formatStamp) {
         reset();
         loadAppointments();
     }
     timeStamp = moment().valueOf();
     formatStamp = moment(timeStamp).format("L");
-    console.log(formatStamp);  
-})
-
-
+});
 
 loadAppointments();
 timeCheck();
-//run time/dateCheck in the background to keep up to date
+//run timeCheck in the background to keep up to date
 var refresh = setInterval(timeCheck, (1000 * 60) * 3);
