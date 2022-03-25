@@ -1,6 +1,5 @@
 //add today's date to the header
-var currentDay = document.querySelector("#currentDay");
-currentDay.textContent = moment().format('dddd, MMMM Do');
+$("#currentDay").text(moment().format('dddd, MMMM Do'));
 
 //event array
 var schedAppts = {
@@ -60,7 +59,7 @@ var timeCheck = function() {
     var duration = moment.duration(current.diff(start));
     workDay = Math.floor(duration.asHours());
     currentTime();
-    dateCheck();
+    // dateCheck();
 }
 
 //the index number of each array in the savedAppts array corresponds to one hour passing in the work day, check that against workDay
@@ -101,17 +100,25 @@ var reset = function() {
     saveAppointments();
 }
 
-//if a full day has passed (between 00:00 and 00:05) reset localStorage to prepare for a new day
-var dateCheck = function() {
-    var newDay = moment().hour(00).minutes(00);
-    var current = moment();
-    var dateReset = moment.duration(current.diff(newDay));
-    dateReset = dateReset.asHours();
-    if (dateReset < 0.09) {
+//
+var timeStamp = moment().valueOf();
+var formatStamp = moment(timeStamp).format("L");
+console.log(formatStamp);
+
+$("#container").mousemove(function() {
+    console.log("moved!")
+    var now = moment().valueOf();
+    var formatNow = moment(now).format("L");
+    if (formatNow !== formatStamp) {
         reset();
         loadAppointments();
     }
-}
+    timeStamp = moment().valueOf();
+    formatStamp = moment(timeStamp).format("L");
+    console.log(formatStamp);  
+})
+
+
 
 loadAppointments();
 timeCheck();
