@@ -40,18 +40,7 @@ var loadAppointments = function() {
     schedAppts = JSON.parse(localStorage.getItem("schedAppts"));
     //if no array saved to localStorage, upload blank array
     if (!schedAppts) {
-        schedAppts = {
-            nineAM: [],
-            tenAM: [],
-            elevenAM: [],
-            twelvePM: [],
-            onePM: [],
-            twoPM: [],
-            threePM: [],
-            fourPM: [],
-            fivePM: []
-        };
-        saveAppointments();
+        reset();
     }
     Object.keys(schedAppts)
     .forEach(function eachKey(key) { 
@@ -71,6 +60,7 @@ var timeCheck = function() {
     var duration = moment.duration(current.diff(start));
     workDay = Math.floor(duration.asHours());
     currentTime();
+    dateCheck();
 }
 
 //the index number of each array in the savedAppts array corresponds to one hour passing in the work day, check that against workDay
@@ -95,7 +85,35 @@ var currentTime = function() {
     });
 }
 
+//reset local storage
+var reset = function() {
+    schedAppts = {
+        nineAM: [],
+        tenAM: [],
+        elevenAM: [],
+        twelvePM: [],
+        onePM: [],
+        twoPM: [],
+        threePM: [],
+        fourPM: [],
+        fivePM: []
+    };
+    saveAppointments();
+}
+
+//if a full day has passed (between 00:00 and 00:05) reset localStorage to prepare for a new day
+var dateCheck = function() {
+    var newDay = moment().hour(00).minutes(00);
+    var current = moment();
+    var dateReset = moment.duration(current.diff(newDay));
+    dateReset = dateReset.asHours();
+    if (dateReset < 0.09) {
+        reset();
+        loadAppointments();
+    }
+}
+
 loadAppointments();
 timeCheck();
-//run timeCheck in the background to keep up to date
-var refresh = setInterval(timeCheck, (1000 * 60) * 15);
+//run time/dateCheck in the background to keep up to date
+var refresh = setInterval(timeCheck, (1000 * 60) * 3);
