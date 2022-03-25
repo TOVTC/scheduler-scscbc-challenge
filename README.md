@@ -1,9 +1,9 @@
 # Work Day Scheduler
 This website hosts a basic planner for your work day.
 ## About This Repository
-This website hosts a basic planner application.</br>
-Tasks can be added to each hour of the work day by directly clicking on its corresponding time block - but don't forget to save! Unsaved tasks will appear with a red border, and unsaved changes can be undone by hitting refresh. Your saved tasks will magically reappear thanks to localStorage.</br>
-Individual tasks can be cleared by deleting the text in a specific time block and hitting save, or clear all tasks in the day using the handy "Reset All Tasks" button. At the start of a new day, tasks will automatically be cleared from storage and the page.</br>
+This website hosts a basic planner application.</br></br>
+Tasks can be added to each hour of the work day by directly clicking on its corresponding time block - but don't forget to save! Unsaved tasks will appear with a red border, and unsaved changes can be undone by hitting refresh. Your saved tasks will magically reappear thanks to localStorage.</br></br>
+Individual tasks can be cleared by deleting the text in a specific time block and hitting save, or clear all tasks in the day using the handy "Reset All Tasks" button. At the start of a new day, tasks will automatically be cleared from storage and the page.</br></br>
 To help keep you on track, this application also features a dynamic date and colour-coded time display that reflects the current hour in the work day.
 
 ## Website
