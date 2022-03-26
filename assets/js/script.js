@@ -1,3 +1,6 @@
+//add today's date to the header
+$("#currentDay").text(moment().format('dddd, MMMM Do'));
+
 //event array
 var schedAppts = {
     nineAM: [],
@@ -83,8 +86,6 @@ workDay = 0;
 
 //calculate the difference in rounded hours between the current time and 9AM
 var timeCheck = function() {
-    //add today's date to the header
-    $("#currentDay").text(moment().format('dddd, MMMM Do'));
     var start = moment().hour(9).minutes(00);
     var current = moment();
     var duration = moment.duration(current.diff(start));
@@ -138,8 +139,9 @@ $("#container").mousemove(function() {
     loadTimeStamp();
     var now = moment().valueOf();
     var formatNow = moment(now).format("L");
-    //if the current date is not the same as the existing timestamp, reset tasks and set a new timestamp
+    //if the current date is not the same as the existing timestamp, update header, reset tasks and set a new timestamp
     if (formatNow !== formatStamp) {
+        $("#currentDay").text(moment().format('dddd, MMMM Do'));
         reset();
         loadAppointments();
     }
