@@ -1,6 +1,3 @@
-//add today's date to the header
-$("#currentDay").text(moment().format('dddd, MMMM Do'));
-
 //event array
 var schedAppts = {
     nineAM: [],
@@ -86,6 +83,8 @@ workDay = 0;
 
 //calculate the difference in rounded hours between the current time and 9AM
 var timeCheck = function() {
+    //add today's date to the header
+    $("#currentDay").text(moment().format('dddd, MMMM Do'));
     var start = moment().hour(9).minutes(00);
     var current = moment();
     var duration = moment.duration(current.diff(start));
@@ -152,4 +151,4 @@ $("#container").mousemove(function() {
 loadAppointments();
 timeCheck();
 //run timeCheck in the background to keep up to date
-var refresh = setInterval(timeCheck, (1000 * 60) * 3);
+var refresh = setInterval(timeCheck, (1000 * 60) * 1);
