@@ -188,10 +188,11 @@ $("#container").mousemove(function() {
             .format('dddd, MMMM Do'));
         reset();
         loadAppointments();
+        //set a new timeStamp in localStorage
+        timeStamp = moment().valueOf();
+        formatStamp = moment(timeStamp).format("L");
+        uploadTimeStamp();
     }
-    timeStamp = moment().valueOf();
-    formatStamp = moment(timeStamp).format("L");
-    uploadTimeStamp();
 });
 
 loadAppointments();
