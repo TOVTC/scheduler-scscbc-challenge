@@ -1,5 +1,7 @@
 //add today's date to the header
-$("#currentDay").text(moment().format('dddd, MMMM Do'));
+$("#currentDay")
+    .text(moment()
+    .format('dddd, MMMM Do'));
 
 //event array
 var schedAppts = {
@@ -34,12 +36,20 @@ $("#reset-tasks").click(function(){
 //save events
 $(".saveBtn").click(function(){
     //in this element's parent div, find .description
-    $(this).parent().find(".description").removeClass("unSaved");
+    $(this)
+        .parent()
+        .find(".description")
+        .removeClass("unSaved");
     //in schedAppts, reset the array with the key that matches the parent id
-    var hour = $(this).parent().attr("id");
+    var hour = $(this)
+        .parent()
+        .attr("id");
     schedAppts[hour] = [];
     //push the text value of .description to the blank array and update localStorage
-    var apptText = $(this).parent().find(".description").val();
+    var apptText = $(this)
+        .parent()
+        .find(".description")
+        .val();
     schedAppts[hour].push(apptText);
     saveAppointments();
 });
@@ -61,7 +71,10 @@ var loadAppointments = function() {
     .forEach(function eachKey(key) { 
         keyId = "#" + key;
         keyVal = schedAppts[key];
-        $("#container").find(keyId).find(".description").val(keyVal);
+        $("#container")
+            .find(keyId)
+            .find(".description")
+            .val(keyVal);
     });
 }
 
@@ -86,7 +99,9 @@ workDay = 0;
 
 //calculate the difference in rounded hours between the current time and 9AM
 var timeCheck = function() {
-    var start = moment().hour(9).minutes(00);
+    var start = moment()
+        .hour(9)
+        .minutes(00);
     var current = moment();
     var duration = moment.duration(current.diff(start));
     workDay = Math.floor(duration.asHours());
@@ -100,17 +115,44 @@ var currentTime = function() {
         keyId = "#" + key;
         parseInt(index);
         if (index < workDay) {
-            $("#container").find(keyId).find(".description").removeClass("future");
-            $("#container").find(keyId).find(".description").removeClass("present");
-            $("#container").find(keyId).find(".description").addClass("past");
+            $("#container")
+                .find(keyId)
+                .find(".description")
+                .removeClass("future");
+            $("#container")
+                .find(keyId)
+                .find(".description")
+                .removeClass("present");
+            $("#container")
+                .find(keyId)
+                .find(".description")
+                .addClass("past");
         } else if (index === workDay) {
-            $("#container").find(keyId).find(".description").removeClass("future");
-            $("#container").find(keyId).find(".description").removeClass("past");
-            $("#container").find(keyId).find(".description").addClass("present");
+            $("#container")
+                .find(keyId)
+                .find(".description")
+                .removeClass("future");
+            $("#container")
+                .find(keyId)
+                .find(".description")
+                .removeClass("past");
+            $("#container")
+                .find(keyId)
+                .find(".description")
+                .addClass("present");
         } else if (index > workDay) {
-            $("#container").find(keyId).find(".description").removeClass("present");
-            $("#container").find(keyId).find(".description").removeClass("past");
-            $("#container").find(keyId).find(".description").addClass("future");
+            $("#container")
+                .find(keyId)
+                .find(".description")
+                .removeClass("present");
+            $("#container")
+                .find(keyId)
+                .find(".description")
+                .removeClass("past");
+            $("#container")
+                .find(keyId)
+                .find(".description")
+                .addClass("future");
         }
     });
 }
@@ -141,7 +183,9 @@ $("#container").mousemove(function() {
     var formatNow = moment(now).format("L");
     //if the current date is not the same as the existing timestamp, update header, reset tasks and set a new timestamp
     if (formatNow !== formatStamp) {
-        $("#currentDay").text(moment().format('dddd, MMMM Do'));
+        $("#currentDay")
+            .text(moment()
+            .format('dddd, MMMM Do'));
         reset();
         loadAppointments();
     }
