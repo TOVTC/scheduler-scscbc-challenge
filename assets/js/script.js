@@ -160,6 +160,7 @@ var currentTime = function() {
 //create a timestamp of the date the page was loaded
 var timeStamp = moment().valueOf();
 var formatStamp = moment(timeStamp).format("L");
+var universalStamp = formatStamp;
 
 // upload timeStamp
 var uploadTimeStamp = function() {
@@ -168,11 +169,12 @@ var uploadTimeStamp = function() {
 
 //download timeStamp
 var loadTimeStamp = function() {
-    formatStamp = JSON.parse(localStorage.getItem("formatStamp"));
+    universalStamp = JSON.parse(localStorage.getItem("formatStamp"));
     //if no timeStamp saved, set a new one
-    if (!formatStamp) {
+    if (!universalStamp) {
         var timeStamp = moment().valueOf();
         var formatStamp = moment(timeStamp).format("L");
+        uploadTimeStamp();
     }
 }
 
@@ -182,7 +184,7 @@ $("#container").mousemove(function() {
     var now = moment().valueOf();
     var formatNow = moment(now).format("L");
     //if the current date is not the same as the existing timestamp, update header, reset tasks and set a new timestamp
-    if (formatNow !== formatStamp) {
+    if (formatNow !== universalStamp) {
         $("#currentDay")
             .text(moment()
             .format('dddd, MMMM Do'));
